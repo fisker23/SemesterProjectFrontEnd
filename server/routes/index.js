@@ -29,11 +29,25 @@ router.post('/authenticate', function (req, res) {
       role: "admin",
       id: 123423
     };
+
     // We are sending the profile inside the token
     var token = jwt.sign(profile, require("../security/secrets").secretTokenAdmin, { expiresInMinutes: 60*5 });
     res.json({ token: token });
     return;
   }
+    if (req.body.username === 'hassanadmin' && req.body.password === 'tis123') {
+    var profile = {
+      username: 'hassanadmin',
+      role: "admin",
+      id: 1234233
+    };
+
+    // We are sending the profile inside the token
+    var token = jwt.sign(profile, require("../security/secrets").secretTokenAdmin, { expiresInMinutes: 60*5 });
+    res.json({ token: token });
+    return;
+  }
+
 
   else{
     res.status(401).send('Wrong user or password');

@@ -1,5 +1,4 @@
 var mongoose = require( 'mongoose' );
-
 /*
 
 Note:
@@ -14,6 +13,7 @@ Start mongo.exe and do:
   db.testusers.insert({userName : "Anders", email :"aka@cphbusiness.dk",pw: "test",created : new Date()})
 
 */
+
 var dbURI;
 
 //This is set by the backend tests
@@ -21,7 +21,8 @@ if( typeof global.TEST_DATABASE != "undefined" ) {
   dbURI = global.TEST_DATABASE;
 }
 else{
-  dbURI = 'mongodb://localhost/testdb';
+  //dbURI = 'mongodb://localhost/testdb';
+  dbURI = 'mongodb://admin:1234@ds059651.mongolab.com:59651/semesterproject';
 }
 
 mongoose.connect(dbURI);
@@ -56,5 +57,7 @@ var usersSchema = new mongoose.Schema({
   created: { type: Date, default: new Date() }
 });
 
-mongoose.model( 'User', usersSchema,"testusers" );
+
+mongoose.model( 'User', usersSchema);
+
 
