@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var jwt = require('jsonwebtoken');
+var facade = require('../model/facade');
 
 /* GET home page. */
 router.get('/', function(req, res) {
@@ -9,50 +10,26 @@ router.get('/', function(req, res) {
 
 
 router.post('/authenticate', function (req, res) {
-  //TODO: Go and get UserName Password from "somewhere"
-  //if is invalid, return 401
-   if (req.body.username === 'user1' && req.body.password === 'test') {
-    var profile = {
-      username: 'user1',
-      role: "user",
-      id: 1000
-    };
-    // We are sending the profile inside the token
-    var token = jwt.sign(profile, require("../security/secrets").secretTokenUser, { expiresInMinutes: 60*5 });
-    res.json({ token: token });
-    return;
-  }
 
-  if (req.body.username === 'admin1' && req.body.password === 'test') {
-    var profile = {
-      username: 'admin1',
-      role: "admin",
-      id: 123423
-    };
+       facade.checkUser(req.body.username,req.body.password,function(data)
+       {
+           console.log(data)
+           if(data===null){
+               res.status(401).send('Wrong user or password');
+               return;
+           }
+           else if(data.role === 'user'){
+               var token = jwt.sign(data, require("../security/secrets").secretTokenUser, { expiresInMinutes: 60*5 });
+               res.json({ token: token });
+              return;
+           }
+           else if(data.role === 'admin'){
+               var token = jwt.sign(data, require("../security/secrets").secretTokenAdmin, { expiresInMinutes: 60*5 });
+               res.json({ token: token });
+               return;
+           }
 
-    // We are sending the profile inside the token
-    var token = jwt.sign(profile, require("../security/secrets").secretTokenAdmin, { expiresInMinutes: 60*5 });
-    res.json({ token: token });
-    return;
-  }
-    if (req.body.username === 'hassanadmin' && req.body.password === 'tis123') {
-    var profile = {
-      username: 'hassanadmin',
-      role: "admin",
-      id: 1234233
-    };
-
-    // We are sending the profile inside the token
-    var token = jwt.sign(profile, require("../security/secrets").secretTokenAdmin, { expiresInMinutes: 60*5 });
-    res.json({ token: token });
-    return;
-  }
-
-
-  else{
-    res.status(401).send('Wrong user or password');
-    return;
-  }
+       })
 });
 
 
@@ -61,5 +38,10 @@ router.get('/partials/:partialName', function(req, res) {
   var name = req.params.partialName;
   res.render('partials/' + name);
 });
+
+router.post('/createuser/',function(req,res){
+    var kage = facade.addUser(req.body.uName,req.body.uEmail,req.body.uPw);
+    res.redirect('../#/view1');
+})
 
 module.exports = router;

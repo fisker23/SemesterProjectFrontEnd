@@ -31,11 +31,12 @@ angular.module('myAppRename.controllers', []).
       $http
         .post('/authenticate', $scope.user)
         .success(function (data, status, headers, config) {
+              console.log("JEG ER LIGE HER");
           $window.sessionStorage.token = data.token;
           $scope.isAuthenticated = true;
           var encodedProfile = data.token.split('.')[1];
           var profile = JSON.parse(url_base64_decode(encodedProfile));
-          $scope.username = profile.username;
+          $scope.username = profile.userName;
           $scope.isAdmin = profile.role == "admin";
           $scope.isUser = !$scope.isAdmin;
           $scope.error = null;

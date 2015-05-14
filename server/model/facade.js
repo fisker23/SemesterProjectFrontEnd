@@ -7,11 +7,12 @@ var User = mongoose.model("User");
 
 
 
-function _addUser(inusername, inemail, inpassword){
+function _addUser(uName, uEmail, uPw, role){
     var newUser = new User({
-        username: inusername,
-        email: inemail,
-        password: inpassword
+        userName: uName,
+        email: uEmail,
+        pw: uPw,
+        role: role
     })
     newUser.save(function(err, newUser) {
         if (err) return console.error(err);
@@ -19,13 +20,23 @@ function _addUser(inusername, inemail, inpassword){
     });
 }
 
-_addUser("Lars","lam@cphbusiness.dk","test")
-//user.addUser({userName : "Henrik", email :"hsty@cphbusiness.dk",pw: "test",created : new Date()})
-//user.addUser({userName : "Tobias", email :"tog@cphbusiness.dk",pw: "test",created : new Date()})
-//
-//
-//user.addUser({userName : "Anders", email :"aka@cphbusiness.dk",pw: "test",created : new Date()})
+function _checkUser(uName,uPw,callback){
+    User.findOne({userName : uName, pw: uPw}, function(err, result){
+       // console.log(result)
+    callback(result);
+    });
+    //User.find(usertoCheck)
+   // console.log(User.find(usertoCheck));
+}
+
+//_addUser("Lars","HAADASDJOKL","test")
+//_addUser("Allan","HASSAN@cphbusiness.dk","test")
+//_addUser("HADI ABDUL","SKINKE@cphbusiness.dk","test")
+
+
+//_checkUser("henning","kage");
 
 module.exports = {
-    addUser: _addUser
+    addUser: _addUser,
+    checkUser: _checkUser
 }
