@@ -7,12 +7,12 @@ var User = mongoose.model("User");
 
 
 
-function _addUser(uName, uEmail, uPw, role){
+function _addUser(uName, uEmail, uPw){
     var newUser = new User({
         userName: uName,
         email: uEmail,
-        pw: uPw,
-        role: role
+        pw: uPw
+
     })
     newUser.save(function(err, newUser) {
         if (err) return console.error(err);

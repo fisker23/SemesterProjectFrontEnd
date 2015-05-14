@@ -53,7 +53,7 @@ process.on('SIGINT', function() {
 var usersSchema = new mongoose.Schema({
   userName : String,
   email: {type: String, unique: true},
-  role: {type: String, default: "user"},
+  role: {type: String, default: 'user'},
   pw: String,
   created: { type: Date, default: new Date() }
 });
