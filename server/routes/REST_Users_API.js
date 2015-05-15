@@ -6,4 +6,10 @@ router.get('/test', function(req, res) {
     res.end('{"msg" : "Test Message fetched from the server, You are logged on as a User since you could fetch this data"}');
 });
 
+
+
+router.get('/partials/:partialName', function(req, res) {
+    var name = req.params.partialName;
+    res.render('partials/' + name);
+});
 module.exports = router;
