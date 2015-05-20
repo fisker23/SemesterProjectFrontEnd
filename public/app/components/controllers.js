@@ -19,7 +19,7 @@ angular.module('myAppRename.controllers', []).
     }
 
 
-    $scope.title = "Semester Project";
+    $scope.title = "LibertyJet - The Freedom to Choose";
     $scope.username = "";
     $scope.isAuthenticated = false;
     $scope.isAdmin = false;

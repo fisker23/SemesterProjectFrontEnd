@@ -3,6 +3,13 @@
 <br/>
 
   {{info.msg}}
+</div>
+<div>
+<form method="get" ng-controller="View2Ctrl" >
+    <label>Get Reservation:</label><br>
+    <input class="getReservation" id="reservationSearch" name="reservationstring" ng-model="reservationID"><br>
+  <button ng-click="getReservation(reservationID)" class="getReservation2" value="Search">Search</button>
+</form>
 
-
+</div>
 

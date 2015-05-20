@@ -44,4 +44,8 @@ router.post('/createuser/',function(req,res){
     res.redirect('../#/view1');
 })
 
+router.get('/getreservation/',function(req,res){
+
+})
+
 module.exports = router;

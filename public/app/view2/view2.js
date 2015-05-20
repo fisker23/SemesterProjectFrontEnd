@@ -9,19 +9,22 @@ angular.module('myAppRename.view2', ['ngRoute'])
     });
   }])
   .controller('View2Ctrl', ['$scope', '$http', function ($scope, $http) {
-    $http({
-      method: 'GET',
-      url: 'userApi/test'
-    })
-      .success(function (data, status, headers, config) {
-        $scope.info = data;
-        $scope.error = null;
-      }).
-      error(function (data, status, headers, config) {
-        if (status == 401) {
-          $scope.error = "You are not authenticated to request these data";
-          return;
-        }
-        $scope.error = data;
-      });
+   $scope.getReservation = function(reservation) {
+       $http({
+           method: 'GET',
+           url: 'http://libertyjet-team05.rhcloud.com/api/flights/' + reservation ,
+           headers: {'Access-Control-*': 'http://libertyjet-team05.rhcloud.com'}
+       })
+           .success(function (data, status, headers, config) {
+               $scope.reserv = data;
+               $scope.error = null;
+           }).
+           error(function (data, status, headers, config) {
+               if (status == 401) {
+                   $scope.error = "You are not authenticated to request these data";
+                   return;
+               }
+               $scope.error = data;
+           });
+   }
   }]);
