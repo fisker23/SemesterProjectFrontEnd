@@ -46,6 +46,10 @@ router.post('/createuser/',function(req,res){
 
 router.get('/getreservation/',function(req,res){
 
+    facade.getAllAvailableFlights(function(err, data){
+        console.log(data);
+    })
+
 })
 
 module.exports = router;

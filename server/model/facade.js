@@ -6,6 +6,7 @@ var mongoose = require('mongoose');
 var request = require('request');
 var User = mongoose.model("User");
 var airline = mongoose.model("Airline");
+var bodyParser = require('body-parser');
 
 //var bob = new airline({URLtosite: 'http://semesterproject-testnikolai1.rhcloud.com/SemesterProjectFligths/', name: 'Gruppe03'});
 //bob.save(function(err) {
@@ -45,12 +46,12 @@ function _addUser(uName, uEmail, uPw){
 
 function getAllAvailableFlights(callback) {
 
-    airline.URLtosite.find({}, function(err, result){
+    airline.find({}, function(err, result){
 
         result.forEach(function(data){
 
-            request.get(data.URLtosite, function(err, data){
-                callback(data);
+            request(data.URLtosite+'api/flights', function(err, data){
+                callback(null, data);
             })
 
         })
@@ -78,5 +79,7 @@ function _checkUser(uName,uPw,callback){
 
 module.exports = {
     addUser: _addUser,
-    checkUser: _checkUser
+    checkUser: _checkUser,
+    getAllAvailableFlights: getAllAvailableFlights
+
 }
