@@ -3,7 +3,9 @@
  */
 db = require("./db");
 var mongoose = require('mongoose');
+var request = require('request');
 var User = mongoose.model("User");
+var airline = mongoose.model("Airline");
 
 
 
@@ -20,6 +22,19 @@ function _addUser(uName, uEmail, uPw){
     });
 }
 
+function getReservation(id,callback) {
+
+    airline.URLtosite.find({}, function(err, result){
+
+        result.forEach(function(data){
+            data.URLtosite
+            request.
+
+        })
+
+    });
+
+}
 function _checkUser(uName,uPw,callback){
     User.findOne({userName : uName, pw: uPw}, function(err, result){
        // console.log(result)

@@ -58,6 +58,12 @@ var usersSchema = new mongoose.Schema({
   created: { type: Date, default: new Date() }
 });
 
+var airlineSchema = new mongoose.Schema({
+    URLtosite: String,
+    name: String
+
+})
+
 var ticketSchema = new mongoose.Schema({
     ticketID : {type :String, unique:true},
     price : String,
@@ -76,5 +82,5 @@ var ticketSchema = new mongoose.Schema({
 
 mongoose.model( 'User', usersSchema);
 mongoose.model('Ticket', ticketSchema);
-
+mongoose.model('Airline', airlineSchema);
 
