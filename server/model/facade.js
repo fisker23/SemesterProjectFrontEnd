@@ -7,6 +7,27 @@ var request = require('request');
 var User = mongoose.model("User");
 var airline = mongoose.model("Airline");
 
+//var bob = new airline({URLtosite: 'http://semesterproject-testnikolai1.rhcloud.com/SemesterProjectFligths/', name: 'Gruppe03'});
+//bob.save(function(err) {
+//    if (err) return console.error(err)});
+//var bob2 = new airline({URLtosite: 'http://libertyjet-team05.rhcloud.com/', name: 'LibertyJet'});
+//bob2.save(function(err) {
+//    if (err) return console.error(err)});
+//var bob3 = new airline({URLtosite: 'http://Airline7-team007.rhcloud.com', name: 'Gruppe07'});
+//bob3.save(function(err) {
+//    if (err) return console.error(err)});
+
+//
+//})
+//({URLtosite: 'http://semesterproject-testnikolai1.rhcloud.com/SemesterProjectFligths/', name: 'Gruppe03'}.save(function(err, result){
+//
+//})
+//({URLtosite: 'http://libertyjet-team05.rhcloud.com/', name: 'LibertyJet'}.save(function(err, result){
+//
+//})
+//({URLtosite: 'http://Airline7-team007.rhcloud.com', name: 'Gruppe07'}.save(function(err, result){
+//
+//})
 
 
 function _addUser(uName, uEmail, uPw){
@@ -22,13 +43,15 @@ function _addUser(uName, uEmail, uPw){
     });
 }
 
-function getReservation(id,callback) {
+function getAllAvailableFlights(callback) {
 
     airline.URLtosite.find({}, function(err, result){
 
         result.forEach(function(data){
-            data.URLtosite
-            request.
+
+            request.get(data.URLtosite, function(err, data){
+                callback(data);
+            })
 
         })
 
@@ -47,8 +70,10 @@ function _checkUser(uName,uPw,callback){
 //_addUser("Lars","HAADASDJOKL","test")
 //_addUser("Allan","HASSAN@cphbusiness.dk","test")
 //_addUser("HADI ABDUL","SKINKE@cphbusiness.dk","test")
-
-
+//
+//getAllAvailableFlights(function(item){
+//
+//});
 //_checkUser("henning","kage");
 
 module.exports = {

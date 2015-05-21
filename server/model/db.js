@@ -78,8 +78,6 @@ var ticketSchema = new mongoose.Schema({
         created: Date},
     airline : String
 })
-
-
 mongoose.model( 'User', usersSchema);
 mongoose.model('Ticket', ticketSchema);
 mongoose.model('Airline', airlineSchema);
