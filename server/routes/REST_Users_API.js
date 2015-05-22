@@ -14,18 +14,7 @@ router.get('/partials/:partialName', function(req, res) {
     res.render('partials/' + name);
 });
 
-router.get('/flights/:air/:time',function(req,res){
-    var air = req.params.air;
-    var time = req.params.time;
-    facade.performSearch(air,time,function(err,result){
 
-        result.forEach(function(datan){
-
-            if(datan instanceof Array){
-                res.send(datan)
-            }})
-    })
-})
 
 router.get('/getreservation', function(req,res){
 

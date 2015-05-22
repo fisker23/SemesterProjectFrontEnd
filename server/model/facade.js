@@ -62,6 +62,8 @@ var airtemp = [];
     });
 
 }
+
+
 function _checkUser(uName,uPw,callback){
     User.findOne({userName : uName, pw: uPw}, function(err, result){
        // console.log(result)
@@ -88,7 +90,6 @@ var performSearch = function (startAirport, startDate ,callback){
 
         async.parallel(tasks,function(err, result){
             if(err) return console.log(err);
-
             return callback(null, result);
         });
 
@@ -109,8 +110,8 @@ var getRequest = function (elem){
         });
     });
 };
-
-
+//
+//
 //performSearch("CPH",1430784000000,function(err,res){
 ////console.log("data", res)
 //    res.forEach(function(datan){
