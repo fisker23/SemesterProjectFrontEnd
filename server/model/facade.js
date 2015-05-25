@@ -6,6 +6,7 @@ var mongoose = require('mongoose');
 var request = require('request');
 var User = mongoose.model("User");
 var airline = mongoose.model("Airline");
+var Ticket = mongoose.model("Ticket");
 var bodyParser = require('body-parser');
 var async = require('async');
 
@@ -45,23 +46,23 @@ function _addUser(uName, uEmail, uPw){
     });
 }
 
-function getAllAvailableFlights(callback) {
-var airtemp = [];
-    airline.find({}, function(err, result){
-
-        result.forEach(function(data){
-
-            request(data.URLtosite+'api/flights/BER/1432283031', function(err,res,body){
-              airtemp.push(body)
-                console.log(body)
-                callback(null, body);
-            })
-
-        })
-
-    });
-
-}
+//function getAllAvailableFlights(callback) {
+//var airtemp = [];
+//    airline.find({}, function(err, result){
+//
+//        result.forEach(function(data){
+//
+//            request(data.URLtosite+'api/flights/BER/1432283031', function(err,res,body){
+//              airtemp.push(body)
+//                console.log(body)
+//                callback(null, body);
+//            })
+//
+//        })
+//
+//    });
+//
+//}
 
 
 function _checkUser(uName,uPw,callback){
@@ -96,6 +97,43 @@ var performSearch = function (startAirport, startDate ,callback){
 
     });
 };
+var performPost = function (Passengers, flightInstanceJson, URL, userName, callback){
+        var tasks = [];
+            tasks.push(getRequest({
+                url: URL+"api/flights/"+flightInstanceJson.flightID,
+                method: 'POST',
+                json: true,
+                body: Passengers
+            }));
+        async.parallel(tasks,function(err, result){
+            if(err) return console.log(err);
+            var ticket = new Ticket({
+                Airline: flightInstanceJson.airline,
+                price: flightInstanceJson.price,
+                AirportFrom: flightInstanceJson.departure,
+                AirportTo: flightInstanceJson.destination,
+                takeOffDate: flightInstanceJson.takeOffDate,
+                landingDate: flightInstanceJson.landingDate,
+                userName: userName
+            })
+            ticket.save(function(err, ticket) {
+                if (err) return console.error(err);
+            });
+            return callback(null, result);
+        });
+};
+//price : String,
+//    AirportFrom : String,
+//    AirportTo : String,
+//    departure : String,
+//    user : {userName : String,
+//    email:String,
+//    role: String,
+//    pw: String,
+//    created: Date},
+//airline : String
+
+
 
 var getRequest = function (elem){
     return (function(callback)
@@ -120,11 +158,35 @@ var getRequest = function (elem){
 //            console.log(datan)
 //        }})
 //})
+//var Passengers = {Passengers: [{firstName: "Arne",
+//    lastName: "Arnesen",
+//    city: "Shitville",
+//    country: "Airlineland",
+//    street: "PhaggotStreet"},
+//    {firstName: "Arne2",
+//        lastName: "Arnesen2",
+//        city: "Shitville2",
+//        country: "Airlineland2",
+//        street: "PhaggotStreet2"}]};
+//var flightInstanceJson = {
+//    airline: "LibertyJet",
+//    price: "1000.37",
+//    flightID: "1016",
+//    takeOffDate:"Jan 5, 2017 12:00:00 AM",
+//    landingDate:"Jan 5, 2017 12:00:00 AM",
+//    departure: "BIL",
+//    destination: "BAR",
+//    seats: 245,
+//    freeSeats: 241,
+//    bookingCode: true
+//}
+//performPost(Passengers, flightInstanceJson, "http://libertyjet-team05.rhcloud.com/", "carsten", function(err, datan){
+//    console.log(datan);
+//} )
 module.exports = {
     performSearch: performSearch,
     addUser: _addUser,
-    checkUser: _checkUser,
-    getAllAvailableFlights: getAllAvailableFlights
+    checkUser: _checkUser
 
 }
 

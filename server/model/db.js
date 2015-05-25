@@ -65,18 +65,13 @@ var airlineSchema = new mongoose.Schema({
 })
 
 var ticketSchema = new mongoose.Schema({
-    ticketID : {type :String, unique:true},
     price : String,
-    flight : String,
+    Airline : String,
     AirportFrom : String,
     AirportTo : String,
-    departure : Date,
-    user : {userName : String,
-        email:String,
-        role: String,
-        pw: String,
-        created: Date},
-    airline : String
+    takeOffDate : String,
+    landingDate : String,
+    userName: String
 })
 mongoose.model( 'User', usersSchema);
 mongoose.model('Ticket', ticketSchema);
