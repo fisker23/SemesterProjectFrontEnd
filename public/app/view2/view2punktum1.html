@@ -1,20 +1,15 @@
-<div class="alert alert-danger" role="alert" ng-show="error">{{error}}</div>
-<p>This is the partial for view 2.</p>
-<br/>
 
-  {{info.msg}}
-</div>
-<div>
-<form method="get" ng-controller="View2Ctrl" >
-    <label>Get Available Flights:</label><br>
-    <input class="getAvailableFlights" id="getAvailableFlightsSearch" name="getAvailableAirportString" ng-model="airportID"><br>
-    <input class="getAvailableFlights" id="getAvailableDateSearch" name="getAvailableAirportString" ng-model="date"><br>
-  <button ng-click="getAvailableFlights(airportID,date)" class="getAvailableFlights2" value="Search">Search</button>
+<div ng-controller="View2punktum1Ctrl">
+    <p>{{flight}}</p>
+    <form method="post" ng-controller="View2punktum1Ctrl" >
+        <label>BOOK YOUR AWESOME FLIGHT</label><br>
+        <input ng-model="firstName"><br>
+        <input ng-model="lastName"><br>
+        <input ng-model="city"><br>
+        <input ng-model="country"><br>
+        <input ng-model="street"><br>
+        <button ng-click="getAvailableFlights(airportID,date)" class="getAvailableFlights2" value="Search">Search</button>
 
+    </form>
 
-    <ul>
-    <li ng-repeat="flight in flights"><a href=""> {{flight}}</a>
-</li>
-</ul>
-</form>
 </div>

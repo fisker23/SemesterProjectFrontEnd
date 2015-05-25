@@ -12,6 +12,17 @@ angular.module('myAppRename.factories', []).
       getInfo: getInfo
     }
   })
+    .factory('flyfabrikken', function(){
+        var realFlight = {};
+        var setFlight = function(flight){
+        realFlight = flight;
+        }
+        var getFlight = function(){
+            return realFlight;
+        }
+        return {setFlight: setFlight,
+                getFlight: getFlight}
+    })
   .factory('authInterceptor', function ($rootScope, $q, $window) {
     return {
       request: function (config) {

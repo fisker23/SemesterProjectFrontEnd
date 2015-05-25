@@ -1,20 +1,22 @@
 'use strict';
 
-angular.module('myAppRename.view2', ['ngRoute'])
+angular.module('myAppRename.view2punktum1', ['ngRoute'])
 
   .config(['$routeProvider', function ($routeProvider) {
-    $routeProvider.when('/view2', {
-      templateUrl: 'app/view2/view2.html',
-      controller: 'View2Ctrl'
+    $routeProvider.when('/view2punktum1', {
+      templateUrl: 'app/view2/view2punktum1.html',
+      controller: 'View2punktum1Ctrl'
     })
 
   }])
-  .controller('View2Ctrl', function ($scope, $http, flyfabrikken) {
+  .controller('View2punktum1Ctrl', function ($scope, $http, flyfabrikken) {
         $scope.setprimaryplane = function(flight){
             flyfabrikken.setFlight = flight;
         }
-        $scope.getprimaryplane = function(){
-            $scope.flight = flyfabrikken.getFlight;
+        $scope.flight = flyfabrikken.getFlight;
+        $scope.Passengers = [];
+        $scope.addPassenger = function(firstName, lastName, city, country, street){
+            var p =
         }
    $scope.getAvailableFlights = function(airport,date) {
        $http({
