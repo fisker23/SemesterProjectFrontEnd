@@ -97,10 +97,10 @@ var performSearch = function (startAirport, startDate ,callback){
 
     });
 };
-var performPost = function (Passengers, flightInstanceJson, URL, userName, callback){
+var performPost = function (Passengers, flightInstanceJson, /*URLtoSite, */userName, callback){
         var tasks = [];
             tasks.push(getRequest({
-                url: URL+"api/flights/"+flightInstanceJson.flightID,
+                url: "http://libertyjet-team05.rhcloud.com/"+"api/flights/"+flightInstanceJson.flightID,
                 method: 'POST',
                 json: true,
                 body: Passengers

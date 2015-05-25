@@ -15,13 +15,24 @@ angular.module('myAppRename.factories', []).
     .factory('flyfabrikken', function(){
         var realFlight = {};
         var setFlight = function(flight){
-        realFlight = flight;
+            realFlight = flight;
         }
         var getFlight = function(){
             return realFlight;
         }
         return {setFlight: setFlight,
-                getFlight: getFlight}
+            getFlight: getFlight}
+    })
+    .factory('urlfabrikken', function(){
+        var realUrl;
+        var setUrl = function(url){
+            realUrl = url;
+        }
+        var getUrl = function(){
+            return realUrl;
+        }
+        return {setUrl: setUrl,
+            getUrl: getUrl}
     })
   .factory('authInterceptor', function ($rootScope, $q, $window) {
     return {

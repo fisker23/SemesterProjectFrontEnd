@@ -9,9 +9,12 @@ angular.module('myAppRename.view2', ['ngRoute'])
     })
 
   }])
-  .controller('View2Ctrl', function ($scope, $http, flyfabrikken) {
+  .controller('View2Ctrl', function ($scope, $http, flyfabrikken, urlfabrikken) {
         $scope.setprimaryplane = function(flight){
             flyfabrikken.setFlight = flight;
+        }
+        $scope.setprimaryurl = function(url){
+            urlfabrikken.setUrl = url;
         }
         $scope.getprimaryplane = function(){
             $scope.flight = flyfabrikken.getFlight;

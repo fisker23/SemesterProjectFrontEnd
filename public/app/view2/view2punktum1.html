@@ -3,13 +3,15 @@
     <p>{{flight}}</p>
     <form method="post" ng-controller="View2punktum1Ctrl" >
         <label>BOOK YOUR AWESOME FLIGHT</label><br>
-        <input ng-model="firstName"><br>
-        <input ng-model="lastName"><br>
-        <input ng-model="city"><br>
-        <input ng-model="country"><br>
-        <input ng-model="street"><br>
-        <button ng-click="getAvailableFlights(airportID,date)" class="getAvailableFlights2" value="Search">Search</button>
-
+        First Name: <input ng-model="firstName"><br>
+        Last Name: <input ng-model="lastName"><br>
+        City: <input ng-model="city"><br>
+        Country: <input ng-model="country"><br>
+        Street: <input ng-model="street"><br>
+        <button ng-click="addPassenger(firstName, lastName, city, country, street)" >Add person!</button>
+        <p ng-repeat="Passenger in Passengers.Passengers">First Name: {{Passenger.firstName}} Last Name: {{Passenger.lastName}}</p>
+        Username: <input ng-model="userName"><br>
+        <button ng-click="makeReservation(userName)">BOOK MY FRIEND</button>
     </form>
 
 </div>
