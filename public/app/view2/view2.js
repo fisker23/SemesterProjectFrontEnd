@@ -9,11 +9,10 @@ angular.module('myAppRename.view2', ['ngRoute'])
     });
   }])
   .controller('View2Ctrl', ['$scope', '$http', function ($scope, $http) {
-   $scope.getAvailableFlights = function(flight) {
+   $scope.getAvailableFlights = function(airport,date) {
        $http({
            method: 'GET',
-           url: '' + flight ,
-           headers: {'Access-Control-*': 'http://libertyjet-team05.rhcloud.com'}
+           url: '/getflights/' + airport + "/"+date ,
        })
            .success(function (data, status, headers, config) {
                $scope.reserv = data;
