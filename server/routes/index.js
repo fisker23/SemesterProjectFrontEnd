@@ -57,11 +57,15 @@ router.post('/createuser/',function(req,res){
 
 router.get('/getflights/:airport/:datan',function(req,res){
 facade.performSearch(req.params.airport,req.params.datan,function(err,data){
-    console.log(data);
-    res.send(data);
+    data.forEach(function(item){
+
+        if(item instanceof Array){
+            console.log(item)
+            res.send(item)
+        }})
 });
 
-
 })
+
 
 module.exports = router;
