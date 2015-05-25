@@ -65,6 +65,12 @@ facade.performSearch(req.params.airport,req.params.datan,function(err,data){
         }})
 });
 
+});
+
+router.post('/makeReservation/', function(req,res){
+    facade.performPost(req.body.Passengers, req.body.flightInstanceJson, req.body.URL, req.body.userName, function(err, result){
+        res.send(result);
+    })
 })
 
 

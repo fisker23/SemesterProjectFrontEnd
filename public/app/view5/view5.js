@@ -12,10 +12,10 @@ angular.module('myAppRename.view5', ['ngRoute'])
         });
     }])
     .controller('View5Ctrl', ['$scope', '$http', function ($scope, $http) {
-        $scope.getReservation = function(reservation) {
+        $scope.makeReservation = function(Passengers, flightInstanceJson, URL, userName) {
             $http({
                 method: 'POST',
-                url: '' + reservation
+                url: '/makeReservation/'
             })
                 .success(function (data, status, headers, config) {
                     $scope.reserv = data;
