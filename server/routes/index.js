@@ -55,11 +55,12 @@ router.post('/createuser/',function(req,res){
     res.redirect('../#/view1');
 })
 
-router.get('/getreservation/',function(req,res){
+router.get('/getflights/;airport/:datan',function(req,res){
+facade.performSearch(req.params.airport,req.params.datan,function(err,data){
+    console.log(data);
+    res.send(data);
+});
 
-    facade.getAllAvailableFlights(function(err, data){
-        console.log(data);
-    })
 
 })
 

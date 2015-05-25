@@ -186,7 +186,9 @@ var getRequest = function (elem){
 module.exports = {
     performSearch: performSearch,
     addUser: _addUser,
-    checkUser: _checkUser
+    checkUser: _checkUser,
+    performPost: performPost
+
 
 }
 
