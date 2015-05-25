@@ -13,10 +13,10 @@ describe('myAppRename.view2 view2Ctrl', function() {
     ctrl = $controller('View2Ctrl', {$scope: scope});
   }));
 
-  it('Should fetch two names ', function () {
-    expect(scope.info).toBeUndefined();
-    httpBackendMock.flush();
-    expect(scope.info.msg).toEqual("Test Message");
-  });
+  //it('Should fetch two names ', function () {
+  //  expect(scope.info).toBeUndefined();
+  //  httpBackendMock.flush();
+  //  expect(scope.info.msg).toEqual("Test Message");
+  //});
 
 });

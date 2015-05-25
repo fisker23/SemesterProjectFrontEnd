@@ -14,7 +14,14 @@ describe('myAppRename.factories', function () {
   });
 
 
-  describe('XXXFactory', function () {
-
+  describe('flyfabrikken', function () {
+    var flyFabrikken;
+      beforeEach(inject(function(_flyfabrikken_){
+          flyFabrikken = _flyfabrikken_;
+          flyFabrikken.setFlight("Boeing");
+      }));
+      it('Should be flight from a factory',function(){
+          expect(flyFabrikken.getFlight()).toBe("Boeing");
+      });
   });
 });
